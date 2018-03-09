@@ -13,14 +13,14 @@ object Producer extends App {
   props.put("bootstrap.servers", "localhost:9092")
 
   props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
-  props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
+  props.put("value.serializer", "edu.knoldus.CustomSerializer")
 
-  val producer = new KafkaProducer[String, String](props)
+  val producer = new KafkaProducer[String, Student](props)
 
   val TOPIC="test"
 
 
-    val record = new ProducerRecord(TOPIC, student.id.toString, student.name)
+    val record = new ProducerRecord(TOPIC, student.id.toString, Student(1,"Ayush"))
     producer.send(record)
 
   producer.close()
